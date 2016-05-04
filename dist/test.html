@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>em</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<style>
+
+html{
+    font-size:62.5%; /* 12px */
+    word-break: break-all;
+}
+
+.layout, .layout2, .layout3{
+    width:100%;
+    background:#fefefe;
+}
+
+.layout{
+    font-size:1.2em;
+    margin-bottom:12px;
+}
+
+.layout2{
+    font-size:1.2rem;
+    margin-bottom:12px;
+}
+
+.layout3{
+    font-size:12px;
+    margin-bottom:12px;
+}
+
+.layout nav, .layout2 nav, .layout3 nav{
+    border:1px solid #333;
+}
+
+.layout nav:after, .layout2 nav:after, .layout3 nav:after{
+    display:block;
+    clear:both;
+    content:"";
+    visibility:hidden;
+    height:0;
+}
+
+.layout nav{
+    background:pink;
+}
+
+.layout2 nav{
+    background:green;
+}
+
+.layout3 nav{
+    background:orange;
+}
+
+.layout a, .layout2 a, .layout3 a{
+    float:left;
+    display:inline-block;
+    color:white;
+    text-decoration:none;
+}
+
+.layout a{
+    padding:1em;
+    margin:1em;
+    font-size:1em;
+    line-height:1em;
+}
+
+.layout2 a{
+    padding:1rem;
+    margin:1rem;
+    font-size:1rem;
+    line-height:1rem;
+}
+
+.layout3 a{
+    padding:12px;
+    margin:12px;
+    font-size:12px;
+    line-height:12px;
+}
+
+</style>
+</head>
+
+<body>
+<div class="layout">
+    <h4>em</h4>
+    <nav>
+        <a href="###">menu10</a>
+        <a href="###">menu2</a>
+        <a href="###">menu3</a>
+        <a href="###">menu4</a>
+        <a href="###">menu5</a>
+    </nav>
+</div>    
+
+<div class="layout2">
+    <h4>rem</h4>
+    <nav>
+        <a href="###">menu1</a>
+        <a href="###">menu2</a>
+        <a href="###">menu3</a>
+        <a href="###">menu4</a>
+        <a href="###">menu5</a>
+    </nav>
+</div>
+
+<div class="layout3">
+    <h4>px</h4>
+    <nav>
+        <a href="###">menu1</a>
+        <a href="###">menu2</a>
+        <a href="###">menu3</a>
+        <a href="###">menu4</a>
+        <a href="###">menu5</a>
+    </nav>
+</div>
+
+</body>
+</html>
