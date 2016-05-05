@@ -1,4 +1,9 @@
-$fontSize: 32px;
+$fontSize: 432px;
+$bgColor: red;
+body{
+	background: $bgColor;
+}
+
 .faq{
 	font-size: $fontSize;
 }
