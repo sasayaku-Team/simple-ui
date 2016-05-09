@@ -1,5 +1,7 @@
+
+@import "sass/a.scss";
 $fontSize: 30px;
-$bgColor: yellow;
+$bgColor: rgba(255,255,1,.2);
 body{
 	background: $bgColor;
 }

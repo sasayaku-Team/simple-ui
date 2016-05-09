@@ -38,10 +38,19 @@ var replaceAllSass =  function(replacePath){
         console.log(replacePath);
 
         gulp.task('replace-all-sass', function(){
-            var toBuildFilePath  = replacePath.replace(/dist/g, 'build');
-            var toBuildPath = toBuildFilePath.replace(/\/[^(\/)]*.scss$/g, '');
 
-            console.log(toBuildFilePath);
+            if(process.platform == "win32"){
+                var toBuildPath = replacePath.replace(/\\/g, '/')
+                                             .replace(/dist/g, 'build')
+                                             .replace(/\/[^(\/)]*.scss$/g, '');
+
+
+                
+            }else if(process.platform == "darwin"){
+                var toBuildPath = replacePath.replace(/dist/g, 'build')
+                                             .replace(/\/[^(\/)]*.scss$/g, '')
+            }
+
             console.log(toBuildPath);
 
             return gulp.src(replacePath)
@@ -62,12 +71,23 @@ var replaceSass =  function(replacePath){
         console.log(replacePath);
 
         gulp.task('replace-sass', function(){
-            var todistPath = replacePath.replace(/sass\/[^(\/)]*.scss$/g, 'all.scss');
-            var toBuildFilePath  = replacePath.replace(/dist/g, 'build');
-            var toBuildPath = toBuildFilePath.replace(/sass\/[^(\/)]*.scss$/g, '');
+
+            if(process.platform == "win32"){
+                var todistPath  = replacePath.replace(/\\/g, '/')
+                                             .replace(/sass\/[^(\/)]*.scss$/g, 'all.scss'),
+                    toBuildPath = replacePath.replace(/\\/g, '/')
+                                             .replace(/dist/g, 'build')
+                                             .replace(/sass\/[^(\/)]*.scss$/g, '');
+
+
+                
+            }else if(process.platform == "darwin"){
+                var todistPath  = replacePath.replace(/sass\/[^(\/)]*.scss$/g, 'all.scss'),
+                    toBuildPath = replacePath.replace(/dist/g, 'build')
+                                             .replace(/sass\/[^(\/)]*.scss$/g, '');
+            }
 
             console.log(todistPath);
-            console.log(toBuildFilePath);
             console.log(toBuildPath);
 
             return gulp.src(todistPath)
@@ -97,10 +117,19 @@ var replaceAllLess =  function(replacePath){
         console.log(replacePath);
 
         gulp.task('replace-all-less', function(){
-            var toBuildFilePath  = replacePath.replace(/dist/g, 'build');
-            var toBuildPath = toBuildFilePath.replace(/\/[^(\/)]*.less$/g, '');
 
-            console.log(toBuildFilePath);
+            if(process.platform == "win32"){
+                var toBuildPath = replacePath.replace(/\\/g, '/')
+                                             .replace(/dist/g, 'build')
+                                             .replace(/\/[^(\/)]*.less$/g, '');
+
+
+                
+            }else if(process.platform == "darwin"){
+                var toBuildPath = replacePath.replace(/dist/g, 'build')
+                                             .replace(/\/[^(\/)]*.less$/g, '')
+            }
+
             console.log(toBuildPath);
 
             return gulp.src(replacePath)
@@ -124,12 +153,23 @@ var replaceLess =  function(replacePath){
         console.log(replacePath);
 
         gulp.task('replace-less', function(){
-            var todistPath = replacePath.replace(/less\/[^(\/)]*.less$/g, 'all.less');
-            var toBuildFilePath  = replacePath.replace(/dist/g, 'build');
-            var toBuildPath = toBuildFilePath.replace(/less\/[^(\/)]*.less$/g, '');
+
+            if(process.platform == "win32"){
+                var todistPath  = replacePath.replace(/\\/g, '/')
+                                             .replace(/less\/[^(\/)]*.less$/g, 'all.less'),
+                    toBuildPath = replacePath.replace(/\\/g, '/')
+                                             .replace(/dist/g, 'build')
+                                             .replace(/less\/[^(\/)]*.less$/g, '');
+
+
+                
+            }else if(process.platform == "darwin"){
+                var todistPath  = replacePath.replace(/less\/[^(\/)]*.less$/g, 'all.less'),
+                    toBuildPath = replacePath.replace(/dist/g, 'build')
+                                             .replace(/less\/[^(\/)]*.less$/g, '');
+            }
 
             console.log(todistPath);
-            console.log(toBuildFilePath);
             console.log(toBuildPath);
 
             return gulp.src(todistPath)
@@ -153,8 +193,20 @@ var replaceHtml = function(replacePath){
         console.log(replacePath);
 
         gulp.task('replace-html', function () {
-            var toBuildFilepath  = replacePath.replace(/dist/g, 'build');
-            var toBuildPath = toBuildFilepath.replace(/\/[^(\/)]*.html$/g, '');
+
+
+            if(process.platform == "win32"){
+                var toBuildPath = replacePath.replace(/\\/g, '/')
+                                             .replace(/dist/g, 'build')
+                                             .replace(/\/[^(\/)]*.html$/g, '');
+
+
+                
+            }else if(process.platform == "darwin"){
+                var toBuildPath = replacePath.replace(/dist/g, 'build')
+                                             .replace(/\/[^(\/)]*.html$/g, '')
+            }
+
 
             console.log(toBuildPath);
 
@@ -256,6 +308,10 @@ gulp.task('livereload', function(){
 });
 
 //default
+gulp.task('default', function(){
+    gulp.run('run');
+});
+
 gulp.task('run', function(cb) {
     runSequence('clean','connect',['html','img','less','sass'],['livereload','watch'], cb);
 });
