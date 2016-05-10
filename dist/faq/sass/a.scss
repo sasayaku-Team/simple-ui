@@ -5,3 +5,13 @@ $color:pink;
 	font-size: $fontSize2;
 	color: $color;
 }
+
+$fontSize: 30px;
+$bgColor: rgba(255,255,1,.2);
+body{
+  background: $bgColor;
+}
+
+.faq{
+  font-size: $fontSize;
+}

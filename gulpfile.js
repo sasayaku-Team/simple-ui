@@ -1,4 +1,4 @@
-var dirdist    = './dist/', // HTML开发目录
+var dirdist    = './dist/', // HTML�?发目�?
     dirbuild     = './build/', // HTML预览目录
     excludedir   = '!./dist/component/**/*.*',
     watchbuild   = dirbuild + '**/*.*',
@@ -297,6 +297,10 @@ gulp.task('watch', function(){
     gulp.watch(dircomponent, function(file){
         //console.log(file.path);
         reloadAllLess();
+    })
+    gulp.watch(dircomponent, function(file){
+        //console.log(file.path);
+        reloadAllSass();
     })
 });
 
