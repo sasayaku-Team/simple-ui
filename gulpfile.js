@@ -3,6 +3,7 @@ var dirdist    = './dist/', // HTMLÂº?ÂèëÁõÆÂΩ?
     excludedir   = '!./dist/component/**/*.*',
     watchbuild   = dirbuild + '**/*.*',
     dirhtml      = dirdist + '**/*.html',
+    dirJs      = dirdist + '**/*.js',
     dirimg       = [dirdist + '**/*.png', dirdist + '**/*.gif', dirdist + '**/*.jpg', dirdist + '**/*.svg'],
     dirless      = [dirdist + '**/all.less', excludedir],
     dirless2     = [dirdist + '**/!(all)*.less',excludedir],
@@ -39,17 +40,10 @@ var replaceAllSass =  function(replacePath){
 
         gulp.task('replace-all-sass', function(){
 
-            if(process.platform == "win32"){
-                var toBuildPath = replacePath.replace(/\\/g, '/')
-                                             .replace(/dist/g, 'build')
-                                             .replace(/\/[^(\/)]*.scss$/g, '');
+            var sysPath     = process.platform == "win32"?replacePath.replace(/\\/g, '/'):replacePath,
+                toBuildPath = sysPath.replace(/dist/g, 'build')
+                    .replace(/\/[^(\/)]*.scss$/g, '');
 
-
-                
-            }else if(process.platform == "darwin"){
-                var toBuildPath = replacePath.replace(/dist/g, 'build')
-                                             .replace(/\/[^(\/)]*.scss$/g, '')
-            }
 
             console.log(toBuildPath);
 
@@ -72,20 +66,11 @@ var replaceSass =  function(replacePath){
 
         gulp.task('replace-sass', function(){
 
-            if(process.platform == "win32"){
-                var todistPath  = replacePath.replace(/\\/g, '/')
-                                             .replace(/sass\/[^(\/)]*.scss$/g, 'all.scss'),
-                    toBuildPath = replacePath.replace(/\\/g, '/')
-                                             .replace(/dist/g, 'build')
-                                             .replace(/sass\/[^(\/)]*.scss$/g, '');
+            var sysPath     = process.platform == "win32"?replacePath.replace(/\\/g, '/'):replacePath,
+                todistPath = sysPath.replace(/sass\/[^(\/)]*.scss$/g, 'all.scss'),
+                toBuildPath = sysPath.replace(/dist/g, 'build')
+                    .replace(/sass\/[^(\/)]*.scss$/g, '');
 
-
-                
-            }else if(process.platform == "darwin"){
-                var todistPath  = replacePath.replace(/sass\/[^(\/)]*.scss$/g, 'all.scss'),
-                    toBuildPath = replacePath.replace(/dist/g, 'build')
-                                             .replace(/sass\/[^(\/)]*.scss$/g, '');
-            }
 
             console.log(todistPath);
             console.log(toBuildPath);
@@ -194,18 +179,9 @@ var replaceHtml = function(replacePath){
 
         gulp.task('replace-html', function () {
 
-
-            if(process.platform == "win32"){
-                var toBuildPath = replacePath.replace(/\\/g, '/')
-                                             .replace(/dist/g, 'build')
-                                             .replace(/\/[^(\/)]*.html$/g, '');
-
-
-                
-            }else if(process.platform == "darwin"){
-                var toBuildPath = replacePath.replace(/dist/g, 'build')
-                                             .replace(/\/[^(\/)]*.html$/g, '')
-            }
+            var sysPath     = process.platform == "win32"?replacePath.replace(/\\/g, '/'):replacePath,
+                toBuildPath = sysPath.replace(/dist/g, 'build')
+                    .replace(/\/[^(\/)]*.html$/g, '');
 
 
             console.log(toBuildPath);
@@ -215,6 +191,28 @@ var replaceHtml = function(replacePath){
                        .pipe(connect.reload());
         });
     
+        gulp.run('replace-html');
+
+        console.log('replace html ok!');
+};
+var replaceJs  = function(replacePath){
+
+        console.log(replacePath);
+
+        gulp.task('replace-html', function () {
+
+            var sysPath     = process.platform == "win32"?replacePath.replace(/\\/g, '/'):replacePath,
+                toBuildPath = sysPath.replace(/dist/g, 'build')
+                    .replace(/\/[^(\/)]*.js$/g, '');
+
+
+            console.log(toBuildPath);
+
+            return gulp.src(replacePath)
+                       .pipe(gulp.dest(toBuildPath))
+                       .pipe(connect.reload());
+        });
+
         gulp.run('replace-html');
 
         console.log('replace html ok!');
@@ -260,6 +258,11 @@ gulp.task('html', function () {
     return gulp.src(dirhtml)
                .pipe(gulp.dest(dirbuild));
 });
+//js
+gulp.task('js', function () {
+    return gulp.src(dirjs)
+               .pipe(gulp.dest(dirbuild));
+});
 
 //img
 gulp.task('img', function () {
@@ -294,6 +297,11 @@ gulp.task('watch', function(){
         //connect.server.changed(file.path);
         replaceHtml(file.path);
     });
+    gulp.watch(dirjs, function(file){
+        //console.log(file.path);
+        //connect.server.changed(file.path);
+        replaceJs(file.path);
+    });
     gulp.watch(dircomponent, function(file){
         //console.log(file.path);
         reloadAllLess();
@@ -317,7 +325,7 @@ gulp.task('default', function(){
 });
 
 gulp.task('run', function(cb) {
-    runSequence('clean','connect',['html','img','less','sass'],['livereload','watch'], cb);
+    runSequence('clean','connect',['html', 'js', 'img','less','sass'],['livereload','watch'], cb);
 });
 
 

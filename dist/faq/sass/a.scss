@@ -15,3 +15,24 @@ body{
 .faq{
   font-size: $fontSize;
 }
+
+.locale{
+  display: flex;
+  flex-wrap: wrap;
+  //justify-content: space-between;
+  background: rgba(0,0,0,.2);
+}
+.locale span{
+  flex-grow: 1;
+  margin: 5px;
+  border: 1px solid red;
+  text-align: center;
+
+}
+.locale span a{
+  display: block;
+  float: left;
+  padding:2px 5px;
+  line-height: 1.5em;
+  width: 100%;
+}
