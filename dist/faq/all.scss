@@ -1,16 +1,17 @@
 // Mixins
-@import "../../node_modules/materialize-sass-origin/sass/components/mixins";
-@import "../../node_modules/materialize-sass-origin/sass/components/color";
+@import "../common/sass/components/mixins";
+@import "../common/sass/components/color";
 
 // Variables;
-@import "../../node_modules/materialize-sass-origin/sass/components/variables";
+@import "../common/sass/components/variables";
 
 // Reset
-@import "../../node_modules/materialize-sass-origin/sass/components/normalize";
-@import "../../node_modules/materialize-sass-origin/sass/components/global";
-@import "../../node_modules/materialize-sass-origin/sass/components/typography";
+@import "../common/sass/components/normalize";
+@import "../common/sass/components/global";
+@import "../common/sass/components/typography";
 //@import "../../node_modules/materialize-sass-origin/sass/components/roboto";
 
-@import "../../node_modules/materialize-sass-origin/sass/components/buttons";
+@import "../common/sass/components/buttons";
+@import "../common/sass/components/waves";
 
 @import "sass/a";
