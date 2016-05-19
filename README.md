@@ -1,1 +1,3 @@
 # simple-ui
+
+* npm install
